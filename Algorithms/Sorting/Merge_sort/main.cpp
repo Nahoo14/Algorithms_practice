@@ -16,10 +16,19 @@ void merge(int arr [], int start, int halfway, int end){
                         temp[k++] = arr[j++];
                 }
         }
-
+        // add at both ends
+        while(i<=halfway){
+                temp[k++] = arr[i++];
+        }
+        while(j<=end){
+                temp[k++] = arr[j++];
+        }
+        for(int l = 0; l <= end; l++){
+                arr[l] = temp[l];
+        }
 }
 void mergeSort(int arr[], int start, int end){
-        if(start<=end){
+        if(start>=end){
                 return;
         }
         int halfway = (start + end)/2;
@@ -32,4 +41,7 @@ int main(){
 
         int size = sizeof(arr)/sizeof(arr[0]);
         mergeSort(arr,0,size-1);
+        for(int i = 0; i < size; i++){
+                cout << arr[i] << ",";
+        }
 }
