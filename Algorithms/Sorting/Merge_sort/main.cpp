@@ -2,6 +2,16 @@
 
 using namespace std;
 
+void print_array(int arr[], int size){
+        for(int i = 0; i < size; i++){
+                cout << arr[i];
+                if(i<size-1)
+                        cout << ",";
+                else
+                        cout << endl;
+        }
+}
+
 
 void merge(int arr [], int start, int halfway, int end){
         int i = 0;
@@ -28,7 +38,7 @@ void merge(int arr [], int start, int halfway, int end){
         }
 }
 void mergeSort(int arr[], int start, int end){
-        if(start>=end){
+        if(start==end){
                 return;
         }
         int halfway = (start + end)/2;
@@ -36,12 +46,11 @@ void mergeSort(int arr[], int start, int end){
         mergeSort(arr,halfway+1,end);
         merge(arr,start,halfway,end);
 }
+
 int main(){
-	int arr[5] = {4,0,2,3,1};
+	int arr[] = {4,3,2,0,1,5,6};
 
         int size = sizeof(arr)/sizeof(arr[0]);
         mergeSort(arr,0,size-1);
-        for(int i = 0; i < size; i++){
-                cout << arr[i] << ",";
-        }
+        print_array(arr,size);
 }
