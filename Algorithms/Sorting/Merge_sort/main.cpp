@@ -23,7 +23,7 @@ void merge(vector<int>&arr, int start, int halfway, int end){
                 right_arr[i] = arr[halfway+i+1];
         }
         // cout << "Printing left array------------" << endl;
-        // print_vector(left_arr);
+        // print_vector(left_larr);
         // cout << "Printing right array------------" << endl;
         // print_vector(right_arr);
         int i = 0;

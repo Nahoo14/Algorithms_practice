@@ -15,7 +15,7 @@ int * insertion_sort(int arr[], int len){
         }
     }
     return arr;
-}
+} 
 
 int main(){
     int arr [] = {8,5,2,6,9,3,1,4,0,7};

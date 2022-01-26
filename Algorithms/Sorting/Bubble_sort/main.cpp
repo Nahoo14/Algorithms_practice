@@ -18,7 +18,7 @@ int * bubble_sort(int arr[], int length){
 }
 
 int main(){
-    int arr[] = {7,2,9,8,0,4,3};
+    int arr[] = {0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     int length = sizeof(arr)/sizeof(arr[0]);
     int * ret = bubble_sort(arr, length);
     cout << "[";
