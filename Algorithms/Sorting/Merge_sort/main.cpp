@@ -1,56 +1,71 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-void print_array(int arr[], int size){
-        for(int i = 0; i < size; i++){
-                cout << arr[i];
-                if(i<size-1)
-                        cout << ",";
-                else
-                        cout << endl;
+void print_vector(vector <int> arr){
+        for(auto i : arr){
+                cout << i << " ";
         }
+        cout << endl;
 }
 
 
-void merge(int arr [], int start, int halfway, int end){
+void merge(vector<int>&arr, int start, int halfway, int end){
+        int left_size = halfway-start+1;
+        int right_size = end-halfway;
+        vector<int>left_arr(left_size,0);
+        vector<int>right_arr(right_size,0);
+        for(int i = 0; i < left_size; i++){
+                left_arr[i] = arr[start+i];
+        }
+        for(int i = 0; i < right_size; i++){
+                right_arr[i] = arr[halfway+i+1];
+        }
+        // cout << "Printing left array------------" << endl;
+        // print_vector(left_arr);
+        // cout << "Printing right array------------" << endl;
+        // print_vector(right_arr);
         int i = 0;
-        int j = halfway+1;
-        int k = 0;
-        int temp [end+1];
-        while((i<=halfway)&&(j<=end)){
-                if(arr[i]<arr[j]){
-                        temp[k++] = arr[i++];
+        int j = 0;
+        int k = start;
+        //print_array(arr,end+1);
+        while((i<left_size)&&(j<right_size)){
+                if(left_arr[i]<=right_arr[j]){
+                        arr[k] = left_arr[i];
+                        k++;
+                        i++;
                 }
                 else{
-                        temp[k++] = arr[j++];
+                        arr[k] = right_arr[j];
+                        k++;
+                        j++;
                 }
         }
         // add at both ends
-        while(i<=halfway){
-                temp[k++] = arr[i++];
+        while(i<left_size){
+                arr[k++] = left_arr[i++];
         }
-        while(j<=end){
-                temp[k++] = arr[j++];
-        }
-        for(int l = 0; l <= end; l++){
-                arr[l] = temp[l];
+        while(j<right_size){
+                arr[k++] = right_arr[j++];
         }
 }
-void mergeSort(int arr[], int start, int end){
-        if(start==end){
+void mergeSort(vector<int> &arr, int start, int end){
+        //print_array(arr,end+1);
+        if(start>=end){
                 return;
         }
-        int halfway = (start + end)/2;
+        int halfway = start + (end-start)/2;
         mergeSort(arr,start,halfway);
         mergeSort(arr,halfway+1,end);
+        //print_array(arr,end+1);
         merge(arr,start,halfway,end);
 }
 
 int main(){
-	int arr[] = {4,3,2,0,1,5,6};
-
-        int size = sizeof(arr)/sizeof(arr[0]);
-        mergeSort(arr,0,size-1);
-        print_array(arr,size);
+	vector<int> arr = {99,44,6,2,1,5,63,87,283,4,0};
+        //vector <int> arr = {4,0,2,3,1,5};
+        //vector<int> arr = {4,0,2,3};
+        mergeSort(arr,0,arr.size()-1);
+        print_vector(arr);
 }
